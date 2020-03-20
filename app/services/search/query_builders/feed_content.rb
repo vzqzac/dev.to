@@ -50,7 +50,7 @@ module Search
         HIGHLIGHT_FIELDS.each do |field_name|
           # This hash can be filled with options to further customize our highlighting
           # https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-highlighting
-          highlight_fields[:fields][field_name] = { order: :score }
+          highlight_fields[:fields][field_name] = { order: :score, number_of_fragments: 2, fragment_size: 75 }
         end
         @body[:highlight] = highlight_fields
       end
@@ -95,6 +95,23 @@ module Search
           next unless @params.key? range_key
 
           { range: { range_key => @params[range_key] } }
+        end.compact
+      end
+
+      def query_conditions
+        self.class::QUERY_KEYS.map do |query_key, query_fields|
+          next if @params[query_key].blank?
+
+          fields = query_fields.presence || ["search_fields"]
+
+          {
+            simple_query_string: {
+              query: "#{@params[query_key]}*",
+              fields: fields,
+              lenient: true,
+              analyze_wildcard: true
+            }
+          }
         end.compact
       end
     end

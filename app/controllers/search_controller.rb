@@ -59,6 +59,9 @@ class SearchController < ApplicationController
   end
 
   def feed_content
+    Rails.logger.info("*" * 150)
+    Rails.logger.info(feed_params)
+    Rails.logger.info("*" * 150)
     feed_docs = Search::FeedContent.search_documents(params: feed_params.to_h)
 
     render json: { result: feed_docs }
