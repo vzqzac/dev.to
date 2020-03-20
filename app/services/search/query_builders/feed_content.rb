@@ -19,7 +19,8 @@ module Search
         tag_names: "tags.name",
         approved: "approved",
         user_id: "user.id",
-        class_name: "class_name"
+        class_name: "class_name",
+        published: "published"
       }.freeze
 
       RANGE_KEYS = %i[
@@ -40,6 +41,10 @@ module Search
 
       def initialize(params)
         @params = params.deep_symbolize_keys
+
+        # Default to only showing published articles to start
+        @params[:published] = true
+
         build_body
       end
 
