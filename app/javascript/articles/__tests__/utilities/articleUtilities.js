@@ -91,11 +91,6 @@ export const articleWithSnippetResult = {
       value:
         'copying Rest withdrawal Handcrafted multi-state Pre-emptive e-markets feed overriding RSS Fantastic Plastic Gloves invoice productize systemic Monaco',
     },
-    comments_blob: {
-      matchLevel: 'none',
-      value:
-        'virtual index Global mindshare Malagasy Ariary back up Handmade green Interactions violet bandwidth Chief e-commerce front-end neural',
-    },
   },
 };
 

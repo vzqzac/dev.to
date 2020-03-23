@@ -7,10 +7,6 @@ export const articleSnippetResultPropTypes = PropTypes.shape({
     matchLevel: PropTypes.oneOf(['full', 'none']),
     value: PropTypes.string.isRequired,
   }),
-  comments_blob: PropTypes.shape({
-    matchLevel: PropTypes.oneOf(['full', 'none']),
-    value: PropTypes.string.isRequired,
-  }),
 });
 
 export const articlePropTypes = PropTypes.shape({

@@ -16,30 +16,10 @@ export const SearchSnippet = ({ snippetResult }) => {
       bodyTextSnippet = `${startingEllipsis + snippetResult.body_text.value}…`;
     }
 
-    let commentsBlobSnippet = '';
-
-    if (
-      snippetResult.comments_blob.matchLevel !== 'none' &&
-      bodyTextSnippet === ''
-    ) {
-      const firstSnippetChar = snippetResult.comments_blob.value[0];
-      let startingEllipsis = '';
-
-      if (firstSnippetChar.toLowerCase() !== firstSnippetChar.toUpperCase()) {
-        startingEllipsis = '…';
-      }
-
-      commentsBlobSnippet = `${startingEllipsis +
-        snippetResult.comments_blob.value}… <i>(comments)</i>`;
-    }
-
-    if (bodyTextSnippet.length > 0 || commentsBlobSnippet.length > 0) {
+    if (bodyTextSnippet.length > 0) {
       return (
         <div className="search-snippet">
-          <span>
-            {bodyTextSnippet}
-            {commentsBlobSnippet}
-          </span>
+          <span>{bodyTextSnippet}</span>
         </div>
       );
     }

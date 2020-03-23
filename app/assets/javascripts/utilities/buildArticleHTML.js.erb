@@ -52,7 +52,6 @@ function buildArticleHTML(article) {
       orgHeadline = '<div class="article-organization-headline"><a class="org-headline-filler" href="/'+article.organization.slug+'"><img alt="'+article.organization.name+' logo" src="'+article.organization.profile_image_90+'" loading="lazy">'+article.organization.name+'</a></div>'
     }
     var bodyTextSnippet = "";
-    var commentsBlobSnippet = "";
     var searchSnippetHTML = "";
     if (article._snippetResult && article._snippetResult.body_text){
       if (article._snippetResult.body_text.matchLevel != "none"){
@@ -63,16 +62,8 @@ function buildArticleHTML(article) {
         }
         bodyTextSnippet = startingEllipsis+article._snippetResult.body_text.value + "…"
       }
-      if (article._snippetResult.comments_blob.matchLevel != "none" && bodyTextSnippet === ""){
-        var firstSnippetChar = article._snippetResult.comments_blob.value[0];
-        var startingEllipsis = ""
-        if (firstSnippetChar.toLowerCase() != firstSnippetChar.toUpperCase()){
-          startingEllipsis = "…"
-        }
-        commentsBlobSnippet = startingEllipsis+article._snippetResult.comments_blob.value + "… <i>(comments)</i>"
-      }
-      if ((bodyTextSnippet.length > 0 || commentsBlobSnippet.length > 0) && article.class_name == "Article"){
-        searchSnippetHTML = '<div class="search-snippet"><span>'+bodyTextSnippet+commentsBlobSnippet+'</span></div>'
+      if (bodyTextSnippet.length > 0 && article.class_name == "Article"){
+        searchSnippetHTML = '<div class="search-snippet"><span>'+bodyTextSnippet+'</span></div>'
       }
     }
     var saveButton = '';
